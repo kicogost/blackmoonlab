@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Home from './Home.jsx'
+import { CLIENT } from '../config/client.js'
+---
+<BaseLayout
+  title={`${CLIENT.name} — ${CLIENT.tagline}`}
+  description={CLIENT.description}
+  canonical={`https://${CLIENT.domain}/`}
+>
+  <Home client:load />
+</BaseLayout>

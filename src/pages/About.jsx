@@ -17,19 +17,12 @@
  * - Never invent bios — use exactly what's in BRIEF.md TEAM_* fields
  */
 
-import { Helmet } from 'react-helmet-async'
 import { CLIENT, ctaLink } from '../config/client.js'
 import InteractiveButton from '../components/InteractiveButton.jsx'
 
 export default function About() {
   return (
     <>
-      <Helmet>
-        <title>Nosotros | {CLIENT.name}</title>
-        <meta name="description" content={`Conoce al equipo de ${CLIENT.name}. ${CLIENT.description}`} />
-        <link rel="canonical" href={`https://${CLIENT.domain}/nosotros`} />
-      </Helmet>
-
       {/* CLAUDE: Build all sections here */}
       <div style={{ paddingTop: 'var(--nav-height)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <p style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral)' }}>

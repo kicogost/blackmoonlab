@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { CLIENT } from '../config/client.js'
 
@@ -6,8 +5,8 @@ export default function ServiceCard({ icon: Icon, title, description, href, ctaL
   const label = ctaLabel || CLIENT.ui.learnMore
 
   return (
-    <Link
-      to={href}
+    <a
+      href={href}
       style={{
         display: 'block',
         background: 'var(--white)',
@@ -61,6 +60,6 @@ export default function ServiceCard({ icon: Icon, title, description, href, ctaL
       }}>
         {label} <ArrowRight size={14} />
       </span>
-    </Link>
+    </a>
   )
 }

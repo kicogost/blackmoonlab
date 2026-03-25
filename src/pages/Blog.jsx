@@ -18,7 +18,6 @@
  */
 
 import { useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { CLIENT, ctaLink } from '../config/client.js'
 import BlogCard from '../components/BlogCard.jsx'
 import InteractiveButton from '../components/InteractiveButton.jsx'
@@ -39,12 +38,6 @@ export default function Blog() {
 
   return (
     <>
-      <Helmet>
-        <title>Blog | {CLIENT.name}</title>
-        <meta name="description" content={`Artículos y guías sobre ${CLIENT.description}`} />
-        <link rel="canonical" href={`https://${CLIENT.domain}/blog`} />
-      </Helmet>
-
       {/* CLAUDE: Build all sections here */}
       <div style={{ paddingTop: 'var(--nav-height)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <p style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral)' }}>

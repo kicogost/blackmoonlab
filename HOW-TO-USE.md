@@ -29,7 +29,7 @@ git push -u origin main
 ## Step 2 — Add the brand assets (2–5 min)
 
 1. Get the client's logo (ask for a transparent `.webp` or `.svg` — the wider the better).
-2. Drop it into the `brand_assets/` folder.
+2. Drop it into **both** `brand_assets/` (for Claude to read) and `public/brand_assets/` (for the build to serve it).
 3. If they have a brand guidelines document (PDF or HTML), drop that in `brand_assets/` too.
 4. If they have team/founder photos, drop those into `founder_photos/`.
 
@@ -99,7 +99,7 @@ Claude will then:
 2. Read `brand_assets/` for colors, fonts, and logo
 3. Populate `src/config/client.js` with all client data
 4. Update the color tokens and fonts in `globals.css`
-5. Update `index.html` with the right language and fonts
+5. Update the Google Fonts link in `src/layouts/BaseLayout.astro`
 6. Build all pages (Home, About, Services, Contact, Blog, Legal pages)
 7. Start the dev server
 8. Take screenshots and check its own work
@@ -133,7 +133,7 @@ npm run build
 
 Then go to [vercel.com](https://vercel.com), connect the GitHub repo, and deploy.
 
-The `vercel.json` file is already set up — no extra configuration needed.
+Vercel auto-detects Astro — no extra configuration needed. Direct URL access to any route works automatically (no SPA workarounds required).
 
 ---
 
@@ -146,7 +146,7 @@ Just fill in `PRIMARY_COLOR` and `ACCENT_COLOR` in BRIEF.md with the hex codes f
 Leave `brand_assets/` empty and add a note in `NOTES:` at the bottom of BRIEF.md. Claude will use a text placeholder and make the site easy to swap the logo in later.
 
 **"What if they only need a single-page landing page?"**
-Set `WEBSITE_MODE: landing-page` in BRIEF.md. Claude will build everything as one scrollable page — no router, no sub-pages.
+Set `WEBSITE_MODE: landing-page` in BRIEF.md. Claude will build everything as one scrollable page with anchor links — no sub-pages.
 
 **"What if they want the site in English?"**
 Set `LANGUAGE: en` in BRIEF.md. All UI strings (button labels, aria-labels, back links, loading text) will be in English automatically.
@@ -155,7 +155,7 @@ Set `LANGUAGE: en` in BRIEF.md. All UI strings (button labels, aria-labels, back
 Open the project in Claude Code and say what you want to change. Example: "Add a new service page for X" or "Update the phone number to Y". Claude reads `client.js` and knows all the context.
 
 **"How do I add a blog post?"**
-Open the project in Claude Code and say: "Write a blog post about [topic] and add it to the blog." Claude will create the post file, add it to the posts array, and register the route.
+Open the project in Claude Code and say: "Write a blog post about [topic] and add it to the blog." Claude will create the post `.jsx` file, its `.astro` route wrapper, and add it to the Blog posts array.
 
 ---
 
@@ -163,16 +163,18 @@ Open the project in Claude Code and say: "Write a blog post about [topic] and ad
 
 ```
 [client-name]/
-├── BRIEF.md              ← Fill this in per client
-├── CLAUDE.md             ← Claude's instructions (don't edit)
-├── brand_assets/         ← Drop logo + brand guide here
-├── founder_photos/       ← Drop team photos here
-├── public/brand_assets/  ← Claude copies logo here automatically
-├── src/config/client.js  ← Claude fills this from BRIEF.md
-├── src/styles/globals.css← Brand tokens (Claude updates Zones 1+2)
-├── src/components/       ← Reusable components (don't edit)
-├── src/pages/            ← Page files (Claude generates these)
-└── vercel.json           ← Deployment config (don't edit)
+├── BRIEF.md                    ← Fill this in per client
+├── CLAUDE.md                   ← Claude's instructions (don't edit)
+├── astro.config.mjs            ← Astro build config (don't edit)
+├── brand_assets/               ← Drop logo + brand guide here
+├── founder_photos/             ← Drop team photos here
+├── public/brand_assets/        ← Also copy logo here (for production)
+├── src/config/client.js        ← Claude fills this from BRIEF.md
+├── src/styles/globals.css      ← Brand tokens (Claude updates Zones 1+2)
+├── src/layouts/BaseLayout.astro← Shared HTML shell: head, fonts, SEO, schema
+├── src/components/             ← Reusable components (don't edit)
+├── src/pages/                  ← .astro route files + .jsx content files
+└── vercel.json                 ← Security headers config
 ```
 
 ---
@@ -182,6 +184,6 @@ Open the project in Claude Code and say: "Write a blog post about [topic] and ad
 | Problem | Fix |
 |---|---|
 | Logo not showing on Vercel | Make sure it's in `public/brand_assets/`, not just `brand_assets/` |
-| Direct URLs return 404 on Vercel | Check `vercel.json` exists with the rewrites rule |
-| Fonts not loading | Check the Google Fonts link in `index.html` matches the fonts in `globals.css` Zone 2 |
+| Fonts not loading | Check the Google Fonts link in `src/layouts/BaseLayout.astro` matches the fonts in `globals.css` Zone 2 |
 | WhatsApp button links to wrong number | Check `WHATSAPP_NUMBER` in `BRIEF.md` — digits only, no `+`, no spaces |
+| Sitemap not generating | Make sure `CLIENT.domain` is set in `src/config/client.js` (no `https://`, no trailing slash) |

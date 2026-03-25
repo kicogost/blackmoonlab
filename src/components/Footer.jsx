@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { CLIENT, whatsappLink } from '../config/client.js'
 
@@ -97,11 +96,11 @@ export default function Footer() {
             <div>
               <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: '600', color: 'var(--white)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '20px' }}>Servicios</h3>
               {serviceLinks.map(l => (
-                <Link key={l.to} to={l.to} style={{ display: 'block', fontSize: '14px', color: 'var(--neutral)', marginBottom: '10px', textDecoration: 'none', transition: 'color 0.2s' }}
+                <a key={l.to} href={l.to} style={{ display: 'block', fontSize: '14px', color: 'var(--neutral)', marginBottom: '10px', textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--white)'}
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--neutral)'}>
                   {l.label}
-                </Link>
+                </a>
               ))}
             </div>
           )}
@@ -111,11 +110,11 @@ export default function Footer() {
             <div>
               <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: '600', color: 'var(--white)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '20px' }}>Empresa</h3>
               {companyLinks.map(l => (
-                <Link key={l.to} to={l.to} style={{ display: 'block', fontSize: '14px', color: 'var(--neutral)', marginBottom: '10px', textDecoration: 'none', transition: 'color 0.2s' }}
+                <a key={l.to} href={l.to} style={{ display: 'block', fontSize: '14px', color: 'var(--neutral)', marginBottom: '10px', textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--white)'}
                   onMouseLeave={e => e.currentTarget.style.color = 'var(--neutral)'}>
                   {l.label}
-                </Link>
+                </a>
               ))}
             </div>
           )}
@@ -151,14 +150,14 @@ export default function Footer() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 0', alignItems: 'center' }}>
             {CLIENT.legal.links.map((l, i, arr) => (
               <span key={l.to} style={{ display: 'flex', alignItems: 'center' }}>
-                <Link
-                  to={l.to}
+                <a
+                  href={l.to}
                   style={{ fontSize: '11px', color: 'rgba(135,149,168,0.7)', textDecoration: 'none', transition: 'color 0.2s', whiteSpace: 'nowrap' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--neutral)'}
                   onMouseLeave={e => e.currentTarget.style.color = 'rgba(135,149,168,0.7)'}
                 >
                   {l.label}
-                </Link>
+                </a>
                 {i < arr.length - 1 && (
                   <span style={{ color: 'rgba(135,149,168,0.35)', margin: '0 10px', fontSize: '11px' }}>·</span>
                 )}

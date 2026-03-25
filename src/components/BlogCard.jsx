@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { CLIENT } from '../config/client.js'
 
@@ -65,8 +64,8 @@ export default function BlogCard({ category, title, excerpt, readTime, href, cat
         WebkitBoxOrient: 'vertical',
         overflow: 'hidden',
       }}>{excerpt}</p>
-      <Link
-        to={href}
+      <a
+        href={href}
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -82,7 +81,7 @@ export default function BlogCard({ category, title, excerpt, readTime, href, cat
         onMouseLeave={e => e.currentTarget.style.gap = '6px'}
       >
         {readMore} <ArrowRight size={14} />
-      </Link>
+      </a>
     </article>
   )
 }

@@ -7,24 +7,65 @@
 3. **Read all files in `brand_assets/`** — extract logo path, colors, typography, and tone.
 4. **Check `src/config/client.js`** — if it still contains placeholder values, populate it from BRIEF.md before writing any component or page.
 5. **Update Zone 1 + Zone 2 of `src/styles/globals.css`** from brand_assets/ color palette and fonts. If no brand guide exists, derive a full palette from `PRIMARY_COLOR` in BRIEF.md.
-6. **Update `index.html`** — set `lang` attribute, Google Fonts URLs, and default `<title>` from BRIEF.md.
+6. **Update the Google Fonts `<link>` in `src/layouts/BaseLayout.astro`** to match the font family names set in Zone 2 of globals.css.
 7. **Only then begin building pages.**
+
+---
+
+## Architecture — Astro SSG + React Islands
+
+This template uses **Astro** for routing, SEO, and static generation, with **React** for interactive components.
+
+**How pages work:**
+- Every route has two files:
+  1. `src/pages/[route].astro` — handles the `<head>` (title, meta, schema) and wraps the React component
+  2. `src/pages/[PageName].jsx` — the React component with all visual content
+
+- Routing is **file-based** (Astro). There is no `App.jsx` or React Router.
+- SEO (title, meta description, canonical, JSON-LD) lives in the `.astro` file, **never** in the `.jsx` file.
+- The LocalBusiness schema is injected automatically on every page by `BaseLayout.astro`.
+- Pass page-specific schemas (FAQPage, Article, etc.) via the `schema` prop on `<BaseLayout>`.
+
+**When creating a new page** (service, blog post, legal, local SEO):
+1. Create the React content component: `src/pages/services/Extranjeria.jsx`
+2. Create the Astro route wrapper: `src/pages/servicios/extranjeria-y-nacionalidad.astro`
+
+```astro
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Extranjeria from '../services/Extranjeria.jsx'
+import { CLIENT } from '../../config/client.js'
+
+// Optional: page-specific schema (FAQPage, Article, etc.)
+const schema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", ... })
+---
+<BaseLayout
+  title={`Extranjería | ${CLIENT.name}`}
+  description="..."
+  canonical={`https://${CLIENT.domain}/servicios/extranjeria-y-nacionalidad`}
+  schema={schema}
+>
+  <Extranjeria client:load />
+</BaseLayout>
+```
+
+3. Add the route to `CLIENT.nav.links` in `src/config/client.js`.
 
 ---
 
 ## Detecting Build Mode
 
 Check `BRIEF.md` field `WEBSITE_MODE`:
-- `full-website` → multi-page React/Vite SPA with React Router (default)
-- `landing-page` → single `src/pages/Home.jsx` only; no router needed; `App.jsx` renders `<Home />` directly; navbar uses anchor links (#section), not `<Link>` components
+- `full-website` → multi-page Astro site (default) — build one `.astro` + one `.jsx` per page
+- `landing-page` → single `src/pages/Home.jsx` only; `src/pages/index.astro` renders it; navbar uses anchor links (`href="#section-id"`), not internal page links
 
 ---
 
 ## full-website Mode
 
 - Build every page listed in `BRIEF.md` under `PAGES`, plus one page per `SERVICE_*` entry.
-- Register all routes in `src/App.jsx` using `React.lazy` + `Suspense`.
-- Navbar links and Footer service/company links must match BRIEF pages exactly.
+- For each page: create the `.jsx` content file AND the `.astro` route wrapper.
+- Navbar links and Footer service/company links must match BRIEF pages exactly (via `CLIENT.nav.links`).
 - Generate blog posts only if `BRIEF.md` specifies `BLOG: true` and provides topics or `TARGET_KEYWORDS`.
 - Generate local SEO pages only if `LOCAL_SEO_CITIES` is populated.
 - **Always generate legal pages** (Aviso Legal, Política de Privacidad, Política de Cookies, Declaración de Accesibilidad) — these are legally required in Spain for every website.
@@ -32,8 +73,8 @@ Check `BRIEF.md` field `WEBSITE_MODE`:
 ## landing-page Mode
 
 - Single `src/pages/Home.jsx` containing all sections as anchors.
-- Remove React Router from `src/App.jsx` — render `<Home />` directly.
-- Navbar becomes a single-page anchor nav. Links use `href="#section-id"`, not `<Link>`.
+- `src/pages/index.astro` already exists and renders `<Home client:load />`.
+- Navbar becomes a single-page anchor nav. Links use `href="#section-id"`, not internal page hrefs.
 - Footer has no internal page links — only contact info + legal inline text.
 - No blog, no service sub-pages, no local SEO pages.
 - Still generate legal pages (as separate routes or inline modals).
@@ -54,27 +95,15 @@ After reading BRIEF.md, populate this file first — before touching any compone
 
 The logo **must** be placed in `public/brand_assets/` — NOT in `src/brand_assets/` or `brand_assets/`.
 
-Vite only serves files from `public/` in production (Vercel, Netlify, etc.). If the logo is referenced from outside `public/`, it will display locally but break on deployment.
+Astro (and Vite) only serve files from `public/` in production (Vercel, Netlify, etc.). If the logo is referenced from outside `public/`, it will display locally but break on deployment.
 
 When a logo is provided in `brand_assets/`, copy it to `public/brand_assets/` and reference it as `/brand_assets/filename.webp` in `client.js`.
 
 ---
 
-## vercel.json (ALWAYS INCLUDE)
-
-Every project must have a `vercel.json` in the root with SPA routing rewrites. Without it, direct URL access to any route other than `/` returns a 404 on Vercel.
-
-```json
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
-}
-```
-
----
-
 ## Cookie Banner (ALWAYS INCLUDE)
 
-Every website for Spain must include the `<CookieBanner />` component — RGPD (Spain's GDPR implementation) legally requires cookie consent. The banner links to `/politica-de-cookies`. Include it in `Layout.jsx` alongside `<WhatsAppButton />`.
+Every website for Spain must include the `<CookieBanner />` component — RGPD (Spain's GDPR implementation) legally requires cookie consent. It is already included in `BaseLayout.astro` and links to `/politica-de-cookies`. Do not remove it.
 
 ---
 
@@ -89,7 +118,7 @@ Every website for Spain must include the `<CookieBanner />` component — RGPD (
 ## Local Dev Server
 
 - Always serve on localhost — never screenshot a `file:///` URL.
-- Start Vite dev server in the background: `npx vite` (port 3000).
+- Start Astro dev server in the background: `npx astro dev --port 3000`
 - If the server is already running, do not start a second instance.
 
 ---
@@ -144,7 +173,32 @@ Open `src/styles/globals.css`. The `:root` block is divided into 3 zones:
 
 **Shadow rgba values** use the primary color's RGB. When you change `--primary`, update the shadow rgba values to match.
 
-**Font imports:** Update the Google Fonts `<link>` in `index.html` to match ZONE 2 font choices.
+**Font imports:** Update the Google Fonts `<link>` in `src/layouts/BaseLayout.astro` (look for the comment `<!-- Fonts — CLAUDE: update href when changing ZONE 2 fonts -->`).
+
+---
+
+## SEO — Schema Markup
+
+The `BaseLayout.astro` automatically injects a **LocalBusiness** JSON-LD schema on every page using data from `client.js`. You do not need to add it manually.
+
+For **page-specific schemas** (FAQPage, Article, LegalService, etc.), pass them via the `schema` prop on `<BaseLayout>`:
+
+```astro
+---
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(q => ({
+    "@type": "Question",
+    "name": q.question,
+    "acceptedAnswer": { "@type": "Answer", "text": q.answer }
+  }))
+})
+---
+<BaseLayout title="..." description="..." schema={faqSchema}>
+  ...
+</BaseLayout>
+```
 
 ---
 
@@ -193,8 +247,8 @@ Only exceptions: generic copy (hero headlines, service descriptions, FAQ answers
 - Do not use default Tailwind blue/indigo as primary color.
 - All UI strings (button labels, aria-labels, back-links, loading text) must be in the language specified in `BRIEF.md` under `LANGUAGE`.
 - Logo always goes in `public/brand_assets/`. Never reference from `src/` or `brand_assets/`.
-- `vercel.json` with SPA rewrites must always be present.
-- `<CookieBanner />` must always be included for Spanish sites.
+- `<CookieBanner />` is already in `BaseLayout.astro` — do not remove it.
+- `InteractiveButton` uses `href` prop only — there is no `to` prop.
 
 ---
 

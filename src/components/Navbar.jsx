@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, Globe, Briefcase, BarChart2, Users, BookOpen,
@@ -13,10 +12,9 @@ const ICONS = {
   FileText, Star, Heart, Utensils, Building2, Phone,
 }
 
-export default function Navbar() {
+export default function Navbar({ pathname = '/' }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const location = useLocation()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
@@ -26,10 +24,8 @@ export default function Navbar() {
 
   const links = CLIENT.nav.links
 
-  // Derive active tab from current path
-  const activeLink = links.find(l =>
-    l.end ? location.pathname === l.to : location.pathname.startsWith(l.to)
-  ) || links[0]
+  // isActive helper — replaces useLocation
+  const isLinkActive = (l) => l.end ? pathname === l.to : pathname.startsWith(l.to)
 
   const onDark = !scrolled
   const tubeColor   = onDark ? 'var(--accent)'   : 'var(--primary)'
@@ -52,28 +48,24 @@ export default function Navbar() {
       <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
         {/* Logo */}
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
           <img
             src={CLIENT.logoSrc}
             alt={CLIENT.logoAlt}
             loading="eager"
             style={{ height: '36px', width: 'auto', filter: logoFilter, transition: 'filter 0.3s' }}
           />
-        </Link>
+        </a>
 
         {/* Desktop nav — tubelight pill container */}
         <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
           {links.map(l => {
-            const isActive = l.end
-              ? location.pathname === l.to
-              : location.pathname.startsWith(l.to)
-            const Icon = ICONS[l.iconName] || Home
+            const isActive = isLinkActive(l)
 
             return (
-              <NavLink
+              <a
                 key={l.to}
-                to={l.to}
-                end={l.end}
+                href={l.to}
                 style={{
                   position: 'relative',
                   display: 'inline-flex',
@@ -142,7 +134,7 @@ export default function Navbar() {
                 )}
 
                 <span style={{ position: 'relative', zIndex: 1 }}>{l.label}</span>
-              </NavLink>
+              </a>
             )
           })}
         </div>
@@ -223,16 +215,13 @@ export default function Navbar() {
           >
             {links.map(l => {
               const Icon = ICONS[l.iconName] || Home
-              const isActive = l.end
-                ? location.pathname === l.to
-                : location.pathname.startsWith(l.to)
+              const isActive = isLinkActive(l)
               return (
-                <NavLink
+                <a
                   key={l.to}
-                  to={l.to}
-                  end={l.end}
+                  href={l.to}
                   onClick={() => setMenuOpen(false)}
-                  style={({ isActive }) => ({
+                  style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '12px',
@@ -246,11 +235,11 @@ export default function Navbar() {
                     borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
                     paddingLeft: isActive ? '12px' : '4px',
                     transition: 'border-color 0.2s, color 0.2s, padding-left 0.2s',
-                  })}
+                  }}
                 >
                   <Icon size={16} strokeWidth={isActive ? 2 : 1.5} />
                   {l.label}
-                </NavLink>
+                </a>
               )
             })}
             <a

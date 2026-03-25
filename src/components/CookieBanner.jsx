@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { CLIENT } from '../config/client.js'
 
 const STORAGE_KEY = 'cookie-consent'
@@ -47,12 +46,12 @@ export default function CookieBanner() {
     >
       <p style={{ fontSize: '13px', color: 'var(--ink-mid)', lineHeight: 1.6 }}>
         {CLIENT.ui.cookieBannerText}{' '}
-        <Link
-          to="/politica-de-cookies"
+        <a
+          href="/politica-de-cookies"
           style={{ color: 'var(--accent-dark)', textDecoration: 'underline', fontWeight: '500' }}
         >
           {CLIENT.ui.cookieBannerLearnMore}
-        </Link>
+        </a>
       </p>
       <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <button

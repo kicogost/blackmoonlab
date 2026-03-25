@@ -1,0 +1,111 @@
+---
+/**
+ * BaseLayout.astro — Shared HTML shell for every page.
+ *
+ * Props:
+ *   title        (required) — <title> tag content
+ *   description  (required) — <meta name="description">
+ *   canonical    (optional) — overrides auto-generated canonical URL
+ *   schema       (optional) — page-specific JSON-LD string (FAQPage, Article, etc.)
+ *                             The LocalBusiness schema is always injected automatically.
+ *
+ * CLAUDE: When updating fonts (ZONE 2 in globals.css), also update the
+ * Google Fonts <link> href below to match the new font family names.
+ */
+import { CLIENT } from '../config/client.js'
+import '../styles/globals.css'
+import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx'
+import WhatsAppButton from '../components/WhatsAppButton.jsx'
+import CookieBanner from '../components/CookieBanner.jsx'
+
+const { title, description, canonical, schema: pageSchema, robots } = Astro.props
+const pathname = Astro.url.pathname
+const canonicalUrl = canonical ?? `https://${CLIENT.domain}${pathname}`
+const ogImage = `https://${CLIENT.domain}${CLIENT.logoSrc}`
+
+// ── LocalBusiness JSON-LD — auto-generated from client.js ──────────────────
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': CLIENT.schemaType || 'LocalBusiness',
+  'name': CLIENT.name,
+  'url': `https://${CLIENT.domain}`,
+  'telephone': CLIENT.phone,
+  'email': CLIENT.email,
+  'image': ogImage,
+  ...(CLIENT.foundingYear ? { 'foundingYear': CLIENT.foundingYear } : {}),
+  ...(CLIENT.openingHours ? { 'openingHours': CLIENT.openingHours } : {}),
+  ...(CLIENT.googleBusinessUrl ? { 'sameAs': [CLIENT.googleBusinessUrl, ...Object.values(CLIENT.social).filter(Boolean)] } : { 'sameAs': Object.values(CLIENT.social).filter(Boolean) }),
+  ...(CLIENT.locations.length === 1
+    ? {
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': CLIENT.locations[0].address,
+          'addressLocality': CLIENT.locations[0].city,
+          'postalCode': CLIENT.locations[0].postal,
+          'addressCountry': CLIENT.locations[0].country,
+        },
+        ...(CLIENT.locations[0].hours ? { 'openingHours': CLIENT.locations[0].hours } : {}),
+      }
+    : CLIENT.locations.length > 1
+    ? {
+        'address': CLIENT.locations.map(loc => ({
+          '@type': 'PostalAddress',
+          'streetAddress': loc.address,
+          'addressLocality': loc.city,
+          'postalCode': loc.postal,
+          'addressCountry': loc.country,
+        })),
+      }
+    : {}),
+}
+const localBusinessJson = JSON.stringify(localBusinessSchema)
+---
+<!DOCTYPE html>
+<html lang={CLIENT.language}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts — CLAUDE: update href when changing ZONE 2 fonts in globals.css -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Primary meta -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  {robots && <meta name="robots" content={robots} />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={CLIENT.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={CLIENT.language === 'es' ? 'es_ES' : CLIENT.language} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- LocalBusiness JSON-LD (injected on every page) -->
+  <script type="application/ld+json" set:html={localBusinessJson} />
+
+  <!-- Page-specific JSON-LD (FAQPage, Article, etc.) -->
+  {pageSchema && <script type="application/ld+json" set:html={pageSchema} />}
+</head>
+<body>
+  <Navbar pathname={pathname} client:load />
+  <main>
+    <slot />
+  </main>
+  <Footer client:load />
+  <WhatsAppButton client:load />
+  <CookieBanner client:load />
+</body>
+</html>

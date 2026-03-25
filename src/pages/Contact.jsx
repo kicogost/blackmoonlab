@@ -18,19 +18,12 @@
  * - Never invent addresses — use CLIENT.locations from client.js
  */
 
-import { Helmet } from 'react-helmet-async'
 import { CLIENT, whatsappLink, ctaLink } from '../config/client.js'
 import InteractiveButton from '../components/InteractiveButton.jsx'
 
 export default function Contact() {
   return (
     <>
-      <Helmet>
-        <title>Contacto | {CLIENT.name}</title>
-        <meta name="description" content={`Contacta con ${CLIENT.name}. ${CLIENT.phone} · ${CLIENT.email}`} />
-        <link rel="canonical" href={`https://${CLIENT.domain}/contacto`} />
-      </Helmet>
-
       {/* CLAUDE: Build all sections here */}
       <div style={{ paddingTop: 'var(--nav-height)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <p style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral)' }}>
