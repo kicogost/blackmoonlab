@@ -1,13 +1,6 @@
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { CLIENT } from '../config/client.js'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-}
 
 function Section({ title, children }) {
   return (
@@ -47,6 +40,19 @@ function Ul({ items }) {
 export { Section, P, Ul }
 
 export default function LegalPage({ title, children }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setVisible(true); obs.disconnect() }
+    }, { threshold: 0.1 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <>
       {/* Mini hero */}
@@ -72,9 +78,17 @@ export default function LegalPage({ title, children }) {
       {/* Content */}
       <section style={{ background: 'var(--white)', padding: '56px 0 80px' }}>
         <div className="container">
-          <motion.div {...fadeUp} style={{ maxWidth: '760px' }}>
+          <div
+            ref={ref}
+            style={{
+              maxWidth: '760px',
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.5s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)',
+            }}
+          >
             {children}
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

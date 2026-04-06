@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, Globe, Briefcase, BarChart2, Users, BookOpen,
   FileText, Star, Heart, Utensils, Building2, Phone,
@@ -84,10 +83,9 @@ export default function Navbar({ pathname = '/' }) {
                 onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = onDark ? 'white' : 'var(--primary)' }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = linkColor }}
               >
-                {/* Sliding pill background */}
+                {/* Active pill background */}
                 {isActive && (
-                  <motion.span
-                    layoutId="tubelight-pill"
+                  <span
                     style={{
                       position: 'absolute',
                       inset: 0,
@@ -95,7 +93,6 @@ export default function Navbar({ pathname = '/' }) {
                       background: pillBg,
                       zIndex: 0,
                     }}
-                    transition={{ type: 'spring', stiffness: 350, damping: 32 }}
                   >
                     {/* Tubelight glow bar on top */}
                     <span style={{
@@ -130,7 +127,7 @@ export default function Navbar({ pathname = '/' }) {
                         left: '0',
                       }} />
                     </span>
-                  </motion.span>
+                  </span>
                 )}
 
                 <span style={{ position: 'relative', zIndex: 1 }}>{l.label}</span>
@@ -193,26 +190,24 @@ export default function Navbar({ pathname = '/' }) {
       </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              position: 'absolute',
-              top: 'var(--nav-height)',
-              left: 0, right: 0,
-              background: 'var(--white)',
-              borderTop: '1px solid var(--border)',
-              padding: '12px 24px 20px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2px',
-              boxShadow: 'var(--shadow-lg)',
-            }}
-          >
+      <div
+        style={{
+          position: 'absolute',
+          top: 'var(--nav-height)',
+          left: 0, right: 0,
+          background: 'var(--white)',
+          borderTop: '1px solid var(--border)',
+          padding: '12px 24px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2px',
+          boxShadow: 'var(--shadow-lg)',
+          opacity: menuOpen ? 1 : 0,
+          transform: menuOpen ? 'translateY(0)' : 'translateY(-8px)',
+          pointerEvents: menuOpen ? 'auto' : 'none',
+          transition: 'opacity 0.2s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94)',
+        }}
+      >
             {links.map(l => {
               const Icon = ICONS[l.iconName] || Home
               const isActive = isLinkActive(l)
@@ -262,9 +257,7 @@ export default function Navbar({ pathname = '/' }) {
             >
               {CLIENT.nav.ctaLabel}
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </div>
 
       <style>{`
         @media (max-width: 900px) {

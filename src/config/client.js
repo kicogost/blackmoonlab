@@ -97,6 +97,16 @@ export const CLIENT = {
     cookieBannerLearnMore: 'Más información',
   },
 
+  // ── Analytics ─────────────────────────────────────────────
+  analytics: {
+    ga4Id: '',  // BRIEF: GA4_MEASUREMENT_ID (format: G-XXXXXXXXXX) — leave empty to disable
+  },
+
+  // ── Brand (mobile browser chrome) ─────────────────────────
+  brand: {
+    primaryColor: '#000000',  // BRIEF: PRIMARY_COLOR (hex, used for mobile browser chrome)
+  },
+
   // ── Legal page links (footer bottom bar) ──────────────────
   // Claude: update paths and labels to match LANGUAGE.
   legal: {

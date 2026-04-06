@@ -72,6 +72,9 @@ const localBusinessJson = JSON.stringify(localBusinessSchema)
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+  <!-- Mobile browser chrome color -->
+  <meta name="theme-color" content={CLIENT.brand?.primaryColor ?? '#000000'} />
+
   <!-- Primary meta -->
   <title>{title}</title>
   <meta name="description" content={description} />
@@ -98,6 +101,36 @@ const localBusinessJson = JSON.stringify(localBusinessSchema)
 
   <!-- Page-specific JSON-LD (FAQPage, Article, etc.) -->
   {pageSchema && <script type="application/ld+json" set:html={pageSchema} />}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ANALYTICS — ACTIVATE: uncomment the <script> block below, then set
+       CLIENT.analytics.ga4Id = 'G-XXXXXXXXXX' in src/config/client.js.
+       Consent-gated: the GA4 script only loads after the user accepts cookies
+       (GDPR-compliant). No further wiring needed — CookieBanner already
+       dispatches the cookie-consent-accepted event on accept.
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <!--
+  <script is:inline define:vars={{ _ga4Id: CLIENT.analytics?.ga4Id ?? '' }}>
+    ;(function () {
+      if (!_ga4Id) return
+      function injectGA4() {
+        if (document.getElementById('ga4-script')) return
+        var s = document.createElement('script')
+        s.id = 'ga4-script'
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + _ga4Id
+        s.async = true
+        document.head.appendChild(s)
+        window.dataLayer = window.dataLayer || []
+        function gtag() { window.dataLayer.push(arguments) }
+        window.gtag = gtag
+        gtag('js', new Date())
+        gtag('config', _ga4Id)
+      }
+      if (localStorage.getItem('cookie-consent') === 'accepted') injectGA4()
+      window.addEventListener('cookie-consent-accepted', injectGA4)
+    })()
+  </script>
+  -->
 </head>
 <body>
   <Navbar pathname={pathname} client:load />

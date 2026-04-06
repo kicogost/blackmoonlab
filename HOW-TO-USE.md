@@ -212,6 +212,32 @@ Open the project in Claude Code and say: "Write a blog post about [topic] and ad
 
 ---
 
+## Analytics Setup
+
+This template includes a GDPR-compliant GA4 integration. The GA4 script **never loads before the user accepts cookies** — it is fully consent-gated.
+
+**To activate analytics for a client:**
+
+1. **Get the GA4 Measurement ID** from the client's Google Analytics property. It looks like `G-XXXXXXXXXX`.
+
+2. **Add it to `src/config/client.js`:**
+   ```js
+   analytics: {
+     ga4Id: 'G-XXXXXXXXXX',  // replace with the real ID
+   },
+   ```
+
+3. **Uncomment the analytics block in `src/layouts/BaseLayout.astro`.** Find the comment block near the closing `</head>` tag that starts with `ACTIVATE:` and remove the surrounding `<!--` and `-->`.
+
+That's it. No further wiring is needed — the consent gate is already connected:
+- On page load, if the user previously accepted cookies (`localStorage cookie-consent = accepted`), GA4 loads immediately.
+- If the user hasn't decided yet, GA4 loads the moment they click **Aceptar** on the cookie banner (via the `cookie-consent-accepted` DOM event).
+- If the user clicks **Rechazar**, GA4 never loads.
+
+> **Note:** If `ga4Id` is left empty (`''`), the analytics block is a no-op even when uncommented — safe to deploy without an ID.
+
+---
+
 ## If something goes wrong
 
 | Problem | Fix |
