@@ -12,8 +12,12 @@ import { ArrowRight } from 'lucide-react'
 export default function InteractiveButton({ variant = 'gold', href, children, style, ...rest }) {
   const cls = `btn-interactive btn-interactive--${variant}`
 
+  function handleClick() {
+    window.gtag?.('event', 'booking_click', { event_category: 'engagement' })
+  }
+
   return (
-    <a href={href} className={cls} style={style} {...rest}>
+    <a href={href} className={cls} style={style} onClick={handleClick} {...rest}>
       <div className="btn-interactive__dot" />
       <span className="btn-interactive__label">{children}</span>
       <span className="btn-interactive__hover-label">

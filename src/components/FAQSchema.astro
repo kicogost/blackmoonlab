@@ -1,0 +1,36 @@
+---
+// AEO: populate faqs from BRIEF.md SERVICE_FAQ_* fields. Minimum 4 questions per service page.
+/**
+ * FAQSchema.astro — Injects a FAQPage JSON-LD schema tag.
+ * Renders nothing visible — schema only.
+ *
+ * Props:
+ *   faqs  Array<{ question: string, answer: string }>
+ *
+ * Usage:
+ *   <FAQSchema faqs={faqs} />
+ */
+
+interface Props {
+  faqs?: Array<{ question: string; answer: string }>
+}
+
+const { faqs } = Astro.props
+
+const schema = faqs && faqs.length > 0
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      })),
+    })
+  : null
+---
+
+{schema && <script type="application/ld+json" set:html={schema} />}

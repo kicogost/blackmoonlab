@@ -25,6 +25,7 @@ export default function WhatsAppButton() {
         transition: 'transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.2s cubic-bezier(0.25,0.46,0.45,0.94)',
         textDecoration: 'none',
       }}
+      onClick={() => window.gtag?.('event', 'whatsapp_click', { event_category: 'engagement' })}
       onMouseEnter={e => {
         e.currentTarget.style.transform = 'scale(1.1)'
         e.currentTarget.style.boxShadow = '0 6px 28px rgba(37,211,102,0.5), 0 4px 12px rgba(0,0,0,0.15)'

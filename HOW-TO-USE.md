@@ -214,27 +214,56 @@ Open the project in Claude Code and say: "Write a blog post about [topic] and ad
 
 ## Analytics Setup
 
-This template includes a GDPR-compliant GA4 integration. The GA4 script **never loads before the user accepts cookies** — it is fully consent-gated.
+Add the GA4 Measurement ID to `CLIENT.analytics.ga4Id` in `src/config/client.js`:
 
-**To activate analytics for a client:**
+```js
+analytics: {
+  ga4Id: 'G-XXXXXXXXXX',  // replace with the real ID
+},
+```
 
-1. **Get the GA4 Measurement ID** from the client's Google Analytics property. It looks like `G-XXXXXXXXXX`.
+That's it — GA4 will only fire after the visitor clicks **Aceptar** on the cookie banner (GDPR-compliant). No further changes needed; the consent gate is already wired.
 
-2. **Add it to `src/config/client.js`:**
-   ```js
-   analytics: {
-     ga4Id: 'G-XXXXXXXXXX',  // replace with the real ID
-   },
-   ```
+Two custom events are tracked automatically:
+- `whatsapp_click` — fired every time a visitor clicks the WhatsApp button
+- `booking_click` — fired every time a visitor clicks any primary CTA button
 
-3. **Uncomment the analytics block in `src/layouts/BaseLayout.astro`.** Find the comment block near the closing `</head>` tag that starts with `ACTIVATE:` and remove the surrounding `<!--` and `-->`.
+To view them in GA4: **Reports → Engagement → Events**
 
-That's it. No further wiring is needed — the consent gate is already connected:
-- On page load, if the user previously accepted cookies (`localStorage cookie-consent = accepted`), GA4 loads immediately.
-- If the user hasn't decided yet, GA4 loads the moment they click **Aceptar** on the cookie banner (via the `cookie-consent-accepted` DOM event).
-- If the user clicks **Rechazar**, GA4 never loads.
+AI referral tracking is also built in: if a visitor arrives from Perplexity, ChatGPT, Claude, Gemini, Copilot, or You.com, a `ai_referral` event fires with the source domain. Find it under **Reports → Engagement → Events → ai_referral**.
 
-> **Note:** If `ga4Id` is left empty (`''`), the analytics block is a no-op even when uncommented — safe to deploy without an ID.
+---
+
+## AEO Setup
+
+For every service page, add a `faqs` array with at least 4 specific questions and answers and pass it to the `FAQ.astro` component:
+
+```astro
+---
+import FAQ from '../../components/FAQ.astro'
+
+const faqs = [
+  { question: '¿Cuánto cuesta la depilación láser en Madrid?', answer: 'Los precios...' },
+  { question: '¿Cuántas sesiones necesito?', answer: 'La mayoría de clientes...' },
+  // ...
+]
+---
+<FAQ faqs={faqs} client:load />
+```
+
+`FAQ.astro` renders both the visible accordion **and** the `FAQPage` JSON-LD schema from the same data source — they can never go out of sync.
+
+Questions should be phrased exactly as a potential customer would ask them to a voice assistant or AI tool. Example: `"¿Cuánto cuesta la depilación láser en Madrid?"` not `"FAQ sobre depilación"`.
+
+---
+
+## Monthly Reporting
+
+1. Export the previous month's GA4 data from **Reports → Audience Overview** and **Reports → Engagement → Events** (download as CSV or copy as text).
+2. Open `REPORT_PROMPT.md` at the repo root, copy the full prompt.
+3. Paste the prompt into Claude followed by the exported data.
+
+Claude will generate a bilingual (Spanish + English) report ready to send to the client.
 
 ---
 
