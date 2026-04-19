@@ -1,17 +1,18 @@
-import { useRef, useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { CLIENT } from '../config/client.js'
 
 function Section({ title, children }) {
   return (
-    <div style={{ marginBottom: '36px' }}>
+    <div style={{ marginBottom: '40px' }}>
       <h2 style={{
-        fontFamily: 'var(--font-display)',
-        fontSize: '18px',
-        fontWeight: '700',
-        color: 'var(--primary)',
-        marginBottom: '12px',
-        paddingBottom: '8px',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '12px',
+        fontWeight: '400',
+        letterSpacing: '0.3em',
+        textTransform: 'uppercase',
+        color: 'var(--accent)',
+        marginBottom: '16px',
+        paddingBottom: '12px',
         borderBottom: '1px solid var(--border)',
       }}>{title}</h2>
       {children}
@@ -21,7 +22,7 @@ function Section({ title, children }) {
 
 function P({ children }) {
   return (
-    <p style={{ fontSize: '14px', color: 'var(--ink-mid)', lineHeight: 1.8, marginBottom: '10px' }}>
+    <p style={{ fontSize: '15px', color: 'var(--ink-mid)', lineHeight: 1.8, marginBottom: '14px', fontWeight: 300, maxWidth: '68ch' }}>
       {children}
     </p>
   )
@@ -29,9 +30,9 @@ function P({ children }) {
 
 function Ul({ items }) {
   return (
-    <ul style={{ paddingLeft: '20px', marginBottom: '10px' }}>
+    <ul style={{ paddingLeft: '20px', marginBottom: '14px' }}>
       {items.map((item, i) => (
-        <li key={i} style={{ fontSize: '14px', color: 'var(--ink-mid)', lineHeight: 1.8, marginBottom: '4px' }}>{item}</li>
+        <li key={i} style={{ fontSize: '15px', color: 'var(--ink-mid)', lineHeight: 1.8, marginBottom: '6px', fontWeight: 300 }}>{item}</li>
       ))}
     </ul>
   )
@@ -40,53 +41,37 @@ function Ul({ items }) {
 export { Section, P, Ul }
 
 export default function LegalPage({ title, children }) {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setVisible(true); obs.disconnect() }
-    }, { threshold: 0.1 })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-
   return (
     <>
       {/* Mini hero */}
       <section style={{
-        background: 'linear-gradient(135deg, var(--primary-deep) 0%, var(--primary) 100%)',
-        paddingTop: 'calc(var(--nav-height) + 40px)',
-        paddingBottom: '40px',
+        background: `
+          radial-gradient(ellipse at top right, rgba(236,31,128,0.1), transparent 60%),
+          var(--primary-deep)
+        `,
+        paddingTop: '80px',
+        paddingBottom: '64px',
       }}>
         <div className="container">
-          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.5)', fontSize: '13px', marginBottom: '16px', textDecoration: 'none' }}>
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--ink-mid)', fontSize: '12px', fontFamily: 'var(--font-mono)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '32px', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-mid)'}>
             <ArrowLeft size={13} /> {CLIENT.ui.backToHome}
           </a>
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            fontWeight: '700',
-            color: 'var(--white)',
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(36px, 5vw, 64px)',
+            color: 'var(--cream)',
+            letterSpacing: '0.02em',
+            lineHeight: 1,
           }}>{title}</h1>
         </div>
       </section>
 
       {/* Content */}
-      <section style={{ background: 'var(--white)', padding: '56px 0 80px' }}>
+      <section style={{ background: 'var(--primary)', padding: '72px 0 120px' }}>
         <div className="container">
-          <div
-            ref={ref}
-            style={{
-              maxWidth: '760px',
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 0.5s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)',
-            }}
-          >
+          <div style={{ maxWidth: '760px' }}>
             {children}
           </div>
         </div>

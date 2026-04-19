@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+  <g transform="translate(150 220)">
+    <text x="0" y="0" font-family="'Bebas Neue', 'Arial Narrow', Impact, sans-serif" font-size="170" letter-spacing="4" fill="#F5F3EF">BLACK MOON</text>
+    <text x="440" y="150" font-family="'Allura', 'Brush Script MT', cursive" font-size="170" fill="#EC1F80" transform="rotate(-3 440 150)">lab</text>
+  </g>
+  <text x="150" y="560" font-family="'DM Mono', monospace" font-size="18" letter-spacing="6" fill="#A8A5A0">LABORATORIO DE CONTENIDO · ROBERTA SCAGLIARINI</text>
+</svg>

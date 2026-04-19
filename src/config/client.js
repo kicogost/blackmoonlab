@@ -1,91 +1,67 @@
 /**
- * src/config/client.js
- *
+ * src/config/client.js — Black Moon Lab
  * Single source of truth for all client-specific constants.
- * Claude populates this file by reading BRIEF.md at session start.
- *
- * NEVER hardcode these values in any component or page.
- * Every component that needs client data imports from here.
- *
- * CLAUDE: Replace ALL placeholder values below with data from BRIEF.md.
  */
 
 export const CLIENT = {
   // ── Identity ──────────────────────────────────────────────
-  name: '[BUSINESS_NAME]',           // BRIEF: BUSINESS_NAME
-  tagline: '[TAGLINE]',              // BRIEF: TAGLINE
-  description: '[SHORT_DESCRIPTION]', // BRIEF: SHORT_DESCRIPTION
-  domain: '[DOMAIN]',                // BRIEF: DOMAIN (no https://, no trailing slash)
-  language: 'es',                    // BRIEF: LANGUAGE
-  schemaType: '[SCHEMA_TYPE]',       // BRIEF: SCHEMA_TYPE
-  foundingYear: null,                // BRIEF: FOUNDING_YEAR (number or null)
+  name: 'Black Moon Lab',
+  tagline: 'Tu laboratorio de contenido semanal.',
+  description: 'Laboratorio estratégico de contenido para emprendedoras de servicios. Estrategia clara cada semana, feedback directo y un sistema que posiciona y vende sin agotarte.',
+  domain: 'blackmoonlab.vercel.app',
+  language: 'es',
+  schemaType: 'ProfessionalService',
+  foundingYear: null,
 
   // ── Brand assets ──────────────────────────────────────────
-  // Logo MUST be in public/brand_assets/ for Vite/Vercel to serve it.
-  logoSrc: '/brand_assets/logo.webp', // Update filename to match actual file in public/brand_assets/
-  logoAlt: '[BUSINESS_NAME]',        // Same as name
+  logoSrc: '/brand_assets/black-moon-lab-logo.svg',
+  logoAlt: 'Black Moon Lab',
 
   // ── Contact ───────────────────────────────────────────────
-  phone: '[PHONE]',                  // BRIEF: PHONE (display format: +34 694 269 008)
-  whatsapp: '[WHATSAPP_NUMBER]',     // BRIEF: WHATSAPP_NUMBER (digits only, no +)
-  whatsappMessage: '',               // BRIEF: WHATSAPP_MESSAGE (URL-encoded automatically)
-  email: '[EMAIL]',                  // BRIEF: EMAIL
-  openingHours: '',                  // BRIEF: OPENING_HOURS (schema.org format)
-  googleBusinessUrl: '',             // BRIEF: GOOGLE_BUSINESS_URL
-  primaryCtaAction: 'whatsapp',      // BRIEF: PRIMARY_CTA_ACTION
-  bookingUrl: '',                    // BRIEF: BOOKING_URL (if primaryCtaAction is booking-link)
+  phone: '+34 620 109 003',
+  whatsapp: '34620109003',
+  whatsappMessage: 'Hola Roberta, me interesa Black Moon Lab.',
+  email: 'roberta@magicalmente.com',
+  openingHours: '',
+  googleBusinessUrl: '',
+  primaryCtaAction: 'booking-link',
+  bookingUrl: 'https://stan.store/Magicalmente/p/black-moon-lab',
 
   // ── NIF/CIF (for legal pages) ──────────────────────────────
-  nif: '[NIF_CIF]',                  // BRIEF: NIF_CIF
-  legalName: '',                     // BRIEF: LEGAL_NAME (leave empty if same as name)
+  nif: 'X2441250F',
+  legalName: 'Roberta Scagliarini',
 
   // ── Locations ─────────────────────────────────────────────
-  // Array of location objects from BRIEF.md LOCATION_* fields.
-  locations: [
-    // {
-    //   city: 'Barcelona',
-    //   address: 'C/ Sardenya, 311',
-    //   postal: '08025',
-    //   country: 'ES',
-    //   hours: 'Mo-Fr 09:00-18:00',
-    //   mapSrc: '',   // Google Maps iframe src
-    // },
-  ],
+  locations: [],
 
   // ── Social media ──────────────────────────────────────────
-  // Add only platforms that exist. Claude will render icons only for non-empty values.
   social: {
-    instagram: '',   // BRIEF: SOCIAL instagram
-    tiktok: '',      // BRIEF: SOCIAL tiktok
-    linkedin: '',    // BRIEF: SOCIAL linkedin
-    facebook: '',    // BRIEF: SOCIAL facebook
-    youtube: '',     // BRIEF: SOCIAL youtube
-    twitter: '',     // BRIEF: SOCIAL twitter_x
+    instagram: 'https://www.instagram.com/magical.mente/',
+    tiktok: '',
+    linkedin: '',
+    facebook: '',
+    youtube: '',
+    twitter: '',
   },
 
   // ── Navigation ────────────────────────────────────────────
+  // Landing-page mode — anchor links to sections on the same page.
   nav: {
-    ctaLabel: '[NAV_CTA_LABEL]',   // BRIEF: NAV_CTA_LABEL
-    ctaHref: '[NAV_CTA_HREF]',     // BRIEF: NAV_CTA_HREF
-
-    // Populate from BRIEF.md PAGES + SERVICE_* entries.
-    // iconName must match a key in the ICONS map in Navbar.jsx.
-    // Available icons: Home, Globe, Briefcase, BarChart2, Users, BookOpen,
-    //                  FileText, Star, Heart, Stethoscope, Utensils, Building2
+    ctaLabel: 'Entra al lab',
+    ctaHref: 'https://stan.store/Magicalmente/p/black-moon-lab',
     links: [
-      { to: '/', label: 'Inicio', iconName: 'Home', end: true },
-      // { to: '/servicios/extranjeria', label: 'Extranjería', iconName: 'Globe', end: false },
-      // { to: '/nosotros', label: 'Nosotros', iconName: 'Users', end: false },
-      // { to: '/blog', label: 'Blog', iconName: 'BookOpen', end: false },
-      // { to: '/contacto', label: 'Contacto', iconName: 'FileText', end: false },
+      { to: '#problema',    label: 'El problema',    iconName: 'Home', end: false },
+      { to: '#sistema',     label: 'El sistema',     iconName: 'Briefcase', end: false },
+      { to: '#como-funciona', label: 'Cómo funciona', iconName: 'BarChart2', end: false },
+      { to: '#roberta',     label: 'Roberta',        iconName: 'Users', end: false },
+      { to: '#faq',         label: 'FAQ',            iconName: 'FileText', end: false },
     ],
   },
 
-  // ── UI strings (translate to LANGUAGE from BRIEF) ─────────
-  // Claude: translate ALL values to the language specified in BRIEF.md LANGUAGE field.
+  // ── UI strings ────────────────────────────────────────────
   ui: {
     loading: 'Cargando...',
-    backToHome: 'Inicio',
+    backToHome: 'Volver al inicio',
     readMore: 'Leer más',
     learnMore: 'Saber más',
     whatsappAriaLabel: 'Escríbenos por WhatsApp',
@@ -99,16 +75,15 @@ export const CLIENT = {
 
   // ── Analytics ─────────────────────────────────────────────
   analytics: {
-    ga4Id: '',  // BRIEF: GA4_MEASUREMENT_ID (format: G-XXXXXXXXXX) — leave empty to disable
+    ga4Id: '',
   },
 
   // ── Brand (mobile browser chrome) ─────────────────────────
   brand: {
-    primaryColor: '#000000',  // BRIEF: PRIMARY_COLOR (hex, used for mobile browser chrome)
+    primaryColor: '#0A0A0A',
   },
 
   // ── Legal page links (footer bottom bar) ──────────────────
-  // Claude: update paths and labels to match LANGUAGE.
   legal: {
     links: [
       { to: '/aviso-legal', label: 'Aviso legal' },
@@ -120,7 +95,6 @@ export const CLIENT = {
 }
 
 // ── Computed helpers ─────────────────────────────────────────
-// WhatsApp link builder (use this everywhere, don't build manually)
 export function whatsappLink() {
   const msg = CLIENT.whatsappMessage
     ? `?text=${encodeURIComponent(CLIENT.whatsappMessage)}`
@@ -128,7 +102,6 @@ export function whatsappLink() {
   return `https://wa.me/${CLIENT.whatsapp}${msg}`
 }
 
-// Primary CTA link builder (respects PRIMARY_CTA_ACTION)
 export function ctaLink(customHref) {
   if (customHref) return customHref
   switch (CLIENT.primaryCtaAction) {
@@ -137,6 +110,6 @@ export function ctaLink(customHref) {
     case 'phone':         return `tel:${CLIENT.phone.replace(/\s/g, '')}`
     case 'booking-link':  return CLIENT.bookingUrl
     case 'contact-form':  return '/contacto'
-    default:              return whatsappLink()
+    default:              return CLIENT.bookingUrl
   }
 }

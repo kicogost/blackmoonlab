@@ -4,6 +4,7 @@ import {
   FileText, Star, Heart, Utensils, Building2, Phone,
 } from 'lucide-react'
 import { CLIENT } from '../config/client.js'
+import Logo from './Logo.jsx'
 
 // Icon lookup — add more as needed for new clients
 const ICONS = {
@@ -26,12 +27,11 @@ export default function Navbar({ pathname = '/' }) {
   // isActive helper — replaces useLocation
   const isLinkActive = (l) => l.end ? pathname === l.to : pathname.startsWith(l.to)
 
-  const onDark = !scrolled
-  const tubeColor   = onDark ? 'var(--accent)'   : 'var(--primary)'
-  const pillBg      = onDark ? 'rgba(200,169,110,0.12)' : 'rgba(13,31,60,0.06)'
-  const linkColor   = onDark ? 'rgba(255,255,255,0.75)' : 'var(--ink-mid)'
-  const activeColor = onDark ? 'var(--accent)' : 'var(--primary)'
-  const logoFilter  = onDark ? 'brightness(0) invert(1)' : 'none'
+  const onDark = true // BML is dark-theme end-to-end
+  const tubeColor   = 'var(--accent)'
+  const pillBg      = 'rgba(236,31,128,0.10)'
+  const linkColor   = 'rgba(245,243,239,0.7)'
+  const activeColor = 'var(--accent)'
 
   return (
     <nav style={{
@@ -39,21 +39,16 @@ export default function Navbar({ pathname = '/' }) {
       top: 0, left: 0, right: 0,
       zIndex: 1000,
       height: 'var(--nav-height)',
-      transition: 'background 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s cubic-bezier(0.25,0.46,0.45,0.94)',
-      background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
-      boxShadow: scrolled ? '0 1px 0 rgba(13,31,60,0.08)' : 'none',
+      transition: 'background 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s cubic-bezier(0.25,0.46,0.45,0.94), border-color 0.3s',
+      background: scrolled ? 'rgba(10,10,10,0.85)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(14px)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(245,243,239,0.08)' : '1px solid transparent',
     }}>
-      <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
 
         {/* Logo */}
-        <a href="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-          <img
-            src={CLIENT.logoSrc}
-            alt={CLIENT.logoAlt}
-            loading="eager"
-            style={{ height: '36px', width: 'auto', filter: logoFilter, transition: 'filter 0.3s' }}
-          />
+        <a href="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }} aria-label={CLIENT.logoAlt}>
+          <Logo size="sm" onDark />
         </a>
 
         {/* Desktop nav — tubelight pill container */}

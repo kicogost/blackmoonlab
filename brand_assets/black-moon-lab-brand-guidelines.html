@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Moon Lab · Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Allura&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --bg-elevated: #141414;
+    --bg-card: #1A1A1A;
+    --ink: #F5F3EF;
+    --ink-muted: #A8A5A0;
+    --ink-subtle: #5E5B57;
+    --border: #252525;
+    --border-subtle: #1C1C1C;
+
+    --pink: #EC1F80;
+    --pink-light: #F56BAA;
+    --pink-dark: #B81464;
+    --pink-wash: rgba(236, 31, 128, 0.08);
+
+    --cream: #F5F3EF;
+
+    --display: "Fontuna", "Bebas Neue", "Arial Narrow", sans-serif;
+    --script: "Signature", "Allura", "Brush Script MT", cursive;
+    --body: "DM Sans", -apple-system, sans-serif;
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --mono: "DM Mono", monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--pink);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.0;
+    text-transform: uppercase;
+  }
+
+  h1 { font-size: clamp(64px, 10vw, 140px); }
+  h2 { font-size: clamp(44px, 6vw, 80px); margin-bottom: 40px; }
+  h3 { font-size: 28px; margin-bottom: 16px; letter-spacing: 0.05em; }
+  h4 {
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+
+  p { max-width: 60ch; color: var(--ink-muted); }
+  p.lead { font-size: 20px; color: var(--ink); font-weight: 300; line-height: 1.5; }
+  p + p { margin-top: 16px; }
+
+  .serif-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.35;
+    color: var(--cream);
+    font-weight: 300;
+    max-width: 50ch;
+  }
+
+  strong { color: var(--ink); font-weight: 500; }
+
+  /* ===== SPARKLE DECORATIONS ===== */
+  .sparkle {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+  }
+
+  .sparkle svg { width: 100%; height: 100%; fill: var(--cream); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
+    border-top: 1px solid var(--cream);
+    position: relative;
+  }
+
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 24px;
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z' fill='%23F5F3EF'/></svg>") center/contain no-repeat;
+    opacity: 0.7;
+  }
+  .hero::before { left: 24px; }
+  .hero::after { right: 24px; }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-title .line-1 {
+    font-family: var(--display);
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.85;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-title .line-2 {
+    font-family: var(--script);
+    font-size: clamp(60px, 10vw, 140px);
+    color: var(--pink);
+    margin-top: -20px;
+    margin-left: 40%;
+    line-height: 1;
+    transform: rotate(-2deg);
+  }
+
+  .hero-tagline {
+    margin-top: 80px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--cream);
+    max-width: 50ch;
+  }
+
+  .hero-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 120px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ===== INDEX ===== */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .index-item {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    gap: 32px;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.3s ease, padding 0.3s ease;
+  }
+
+  .index-item:hover { color: var(--pink); padding-left: 12px; }
+  .index-item:nth-child(odd) { padding-right: 40px; border-right: 1px solid var(--border-subtle); }
+  .index-item:nth-child(even) { padding-left: 40px; }
+  .index-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .index-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.2em;
+  }
+
+  .index-label {
+    font-family: var(--display);
+    font-size: 32px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  /* ===== SECTION: SOBRE ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .relation-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .relation-col h5 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-subtle);
+    margin-bottom: 16px;
+  }
+
+  .relation-col .name {
+    font-family: var(--display);
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .relation-col .name.pink { color: var(--pink); }
+
+  .relation-col p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+
+  .relation-divider {
+    width: 1px;
+    height: 80px;
+    background: var(--border);
+  }
+
+  /* ===== LOGO SECTION ===== */
+  .logo-showcase {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    padding: 80px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    position: relative;
+  }
+
+  .logo-showcase .sparkle.tl { top: 16px; left: 16px; }
+  .logo-showcase .sparkle.br { bottom: 16px; right: 16px; }
+
+  .logo-mark {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.9;
+  }
+
+  .logo-mark .lm-1 {
+    font-family: var(--display);
+    font-size: 88px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .logo-mark .lm-2 {
+    font-family: var(--script);
+    font-size: 64px;
+    color: var(--pink);
+    margin-top: -18px;
+    margin-left: 20%;
+    transform: rotate(-3deg);
+  }
+
+  .logo-variants {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .logo-variant {
+    padding: 60px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border);
+    min-height: 200px;
+    position: relative;
+  }
+
+  .logo-variant.dark { background: var(--bg); }
+  .logo-variant.pink { background: var(--pink); }
+  .logo-variant.cream { background: var(--cream); }
+
+  .logo-variant.cream .lm-1 { color: var(--bg); }
+  .logo-variant.cream .lm-2 { color: var(--pink); }
+  .logo-variant.pink .lm-1 { color: var(--cream); }
+  .logo-variant.pink .lm-2 { color: var(--cream); }
+
+  .logo-variant .lm-1 { font-size: 48px; }
+  .logo-variant .lm-2 { font-size: 36px; margin-top: -10px; }
+
+  .logo-variant-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-subtle);
+  }
+  .logo-variant.cream .logo-variant-label { color: #888; }
+  .logo-variant.pink .logo-variant-label { color: rgba(255,255,255,0.6); }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 48px;
+  }
+
+  .rule-col h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .rule-col.do h5 { color: var(--pink); }
+  .rule-col.dont h5 { color: var(--ink-muted); }
+
+  .rule-col ul {
+    list-style: none;
+  }
+
+  .rule-col li {
+    font-size: 14px;
+    color: var(--ink-muted);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-left: 24px;
+    position: relative;
+  }
+
+  .rule-col.do li::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    color: var(--pink);
+    font-weight: 500;
+  }
+
+  .rule-col.dont li::before {
+    content: "×";
+    position: absolute;
+    left: 0;
+    color: var(--ink-subtle);
+    font-weight: 500;
+  }
+
+  /* ===== COLOR PALETTE ===== */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .swatch {
+    aspect-ratio: 3/4;
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .swatch.bg { background: var(--bg); }
+  .swatch.pink { background: var(--pink); }
+  .swatch.pink-light { background: var(--pink-light); }
+  .swatch.pink-dark { background: var(--pink-dark); }
+  .swatch.cream { background: var(--cream); color: var(--bg); }
+  .swatch.ink-muted { background: var(--ink-muted); color: var(--bg); }
+  .swatch.bg-card { background: var(--bg-card); }
+
+  .swatch-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .swatch-hex {
+    font-family: var(--mono);
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  .swatch-role {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.3;
+    max-width: 80%;
+  }
+
+  .swatch.bg .swatch-role { color: var(--pink); }
+
+  .sub-palette {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .sub-palette .swatch { aspect-ratio: 4/3; padding: 16px; }
+  .sub-palette .swatch-role { font-size: 13px; }
+
+  .proportion-bar {
+    display: flex;
+    height: 56px;
+    margin-top: 48px;
+    border: 1px solid var(--border);
+  }
+
+  .pb-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .pb-segment.bg { background: var(--bg); color: var(--ink-muted); flex: 68; border-right: 1px solid var(--border); }
+  .pb-segment.cream { background: var(--cream); color: var(--bg); flex: 22; border-right: 1px solid var(--border); }
+  .pb-segment.pink { background: var(--pink); color: var(--cream); flex: 10; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .typo-row {
+    padding: 48px 0;
+    border-top: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .typo-row:last-child { border-bottom: 1px solid var(--border-subtle); }
+
+  .typo-meta h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  .typo-meta .font-name {
+    font-family: var(--display);
+    font-size: 24px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .typo-meta .font-use {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-subtle);
+    line-height: 1.5;
+  }
+
+  .typo-sample { overflow: hidden; }
+
+  .sample-display {
+    font-family: var(--display);
+    font-size: 80px;
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .sample-script {
+    font-family: var(--script);
+    font-size: 80px;
+    color: var(--pink);
+    line-height: 1;
+  }
+
+  .sample-serif {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 34px;
+    line-height: 1.3;
+    color: var(--cream);
+    font-weight: 300;
+  }
+
+  .sample-body {
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 55ch;
+  }
+
+  .sample-mono {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+  }
+
+  /* ===== GRAPHIC ELEMENTS ===== */
+  .graphics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .graphic-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 48px 32px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .graphic-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .graphic-preview svg { fill: var(--cream); }
+
+  .graphic-info h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .graphic-info p {
+    font-size: 13px;
+    color: var(--ink-muted);
+    max-width: 30ch;
+  }
+
+  /* Divider with pink accent */
+  .divider-demo {
+    width: 100%;
+    height: 1px;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .divider-demo .sparkle-accent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ===== VOICE & TONE ===== */
+  .voice-principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .principle {
+    padding: 32px 40px 32px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .principle:nth-child(odd) { border-right: 1px solid var(--border-subtle); padding-right: 40px; }
+  .principle:nth-child(even) { padding-left: 40px; padding-right: 0; }
+  .principle:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+
+  .principle-num {
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--pink);
+    line-height: 1;
+  }
+
+  .principle h5 {
+    font-family: var(--display);
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .principle p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+
+  .voice-examples {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .voice-example {
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .voice-example.good { border-left: 3px solid var(--pink); }
+  .voice-example.bad { border-left: 3px solid var(--ink-subtle); opacity: 0.8; }
+
+  .voice-example-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .voice-example.good .voice-example-label { color: var(--pink); }
+  .voice-example.bad .voice-example-label { color: var(--ink-subtle); }
+
+  .voice-example p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--cream);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .voice-example.bad p { color: var(--ink-muted); text-decoration: line-through; text-decoration-color: rgba(168,165,160,0.3); }
+
+  /* ===== UI COMPONENTS ===== */
+  .component-row {
+    padding: 48px 0;
+    border-top: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .component-row:last-child { border-bottom: 1px solid var(--border-subtle); }
+
+  .component-meta h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  .component-meta p {
+    font-size: 13px;
+    color: var(--ink-subtle);
+    line-height: 1.5;
+  }
+
+  .component-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  /* Buttons */
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 18px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .btn-primary {
+    background: var(--pink);
+    color: var(--cream);
+  }
+  .btn-primary:hover { background: var(--pink-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: var(--cream);
+    color: var(--bg);
+  }
+  .btn-secondary:hover { background: var(--pink); color: var(--cream); }
+
+  .btn-ghost {
+    border: 1px solid var(--cream);
+    color: var(--cream);
+  }
+  .btn-ghost:hover { background: var(--cream); color: var(--bg); }
+
+  .btn-link {
+    color: var(--pink);
+    padding: 0;
+    border-bottom: 1px solid var(--pink);
+    padding-bottom: 4px;
+  }
+  .btn-link:hover { color: var(--pink-light); border-color: var(--pink-light); }
+
+  .btn .arrow {
+    transition: transform 0.3s ease;
+  }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  /* Card */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px 32px;
+    max-width: 340px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background: var(--pink);
+  }
+
+  .card-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-family: var(--display);
+    font-size: 32px;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+  }
+
+  /* Form */
+  .form-demo {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    font-family: var(--body);
+    font-size: 15px;
+    color: var(--ink);
+    transition: border-color 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-bottom-color: var(--pink);
+  }
+
+  .form-input::placeholder {
+    color: var(--ink-subtle);
+  }
+
+  /* ===== LANDING PATTERNS ===== */
+  .pattern-preview {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-top: 24px;
+  }
+
+  .pattern-label {
+    background: var(--bg-elevated);
+    padding: 12px 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pattern-body { padding: 60px 40px; position: relative; }
+
+  /* Hero pattern */
+  .mini-hero {
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .mini-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mini-eyebrow::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--pink);
+  }
+
+  .mini-h1 {
+    font-family: var(--display);
+    font-size: 64px;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .mini-h1 .script {
+    font-family: var(--script);
+    color: var(--pink);
+    text-transform: none;
+    font-size: 56px;
+    display: inline-block;
+    margin-left: 8px;
+    transform: translateY(-8px);
+  }
+
+  .mini-lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--cream);
+    max-width: 45ch;
+    margin-bottom: 32px;
+    line-height: 1.4;
+  }
+
+  /* Section block */
+  .mini-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .mini-section-num {
+    font-family: var(--display);
+    font-size: 120px;
+    color: var(--pink);
+    line-height: 0.8;
+  }
+
+  .mini-section h3 {
+    font-family: var(--display);
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+
+  .mini-section p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  /* CTA pattern */
+  .mini-cta {
+    background: var(--bg-card);
+    padding: 60px 48px;
+    text-align: center;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .mini-cta .sparkle.tl { top: 16px; left: 16px; }
+  .mini-cta .sparkle.tr { top: 16px; right: 16px; }
+  .mini-cta .sparkle.bl { bottom: 16px; left: 16px; }
+  .mini-cta .sparkle.br { bottom: 16px; right: 16px; }
+
+  .mini-cta h3 {
+    font-family: var(--display);
+    font-size: 48px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .mini-cta h3 .script {
+    font-family: var(--script);
+    color: var(--pink);
+    text-transform: none;
+    font-size: 44px;
+  }
+
+  .mini-cta p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+    max-width: 45ch;
+    margin: 0 auto 32px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 80px 0 48px;
+    text-align: center;
+    border-top: 1px solid var(--cream);
+    position: relative;
+  }
+
+  footer::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z' fill='%23EC1F80'/></svg>") center/contain no-repeat;
+  }
+
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 32px;
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+  }
+
+  .footer-script {
+    font-family: var(--script);
+    font-size: 28px;
+    color: var(--pink);
+    margin-bottom: 32px;
+  }
+
+  .footer-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-subtle);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .page { padding: 0 24px; }
+    section { padding: 80px 0; }
+    .two-col, .mini-section { grid-template-columns: 1fr; gap: 40px; }
+    .relation-box { grid-template-columns: 1fr; gap: 24px; }
+    .relation-divider { width: 80px; height: 1px; margin: 0 auto; }
+    .palette-grid { grid-template-columns: 1fr 1fr; }
+    .sub-palette { grid-template-columns: 1fr; }
+    .logo-variants { grid-template-columns: 1fr; }
+    .rules-grid, .voice-principles, .voice-examples, .graphics-grid { grid-template-columns: 1fr; }
+    .typo-row, .component-row { grid-template-columns: 1fr; gap: 24px; }
+    .index-grid { grid-template-columns: 1fr; }
+    .index-item:nth-child(odd) { border-right: none; padding-right: 0; }
+    .index-item:nth-child(even) { padding-left: 0; }
+    .sample-display { font-size: 48px; }
+    .sample-script { font-size: 56px; }
+    .sample-serif { font-size: 22px; }
+    .mini-h1 { font-size: 42px; }
+    .principle { padding: 24px 0 !important; border-right: none !important; }
+    .hero-meta, .hero-footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SPARKLE SVG SYMBOL -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="sparkle" viewBox="0 0 24 24">
+      <path d="M12 0 L13.5 10.5 L24 12 L13.5 13.5 L12 24 L10.5 13.5 L0 12 L10.5 10.5 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== HERO ===== -->
+<div class="page">
+  <section class="hero">
+    <div class="hero-meta">
+      <span>Brand Guidelines · V1.0</span>
+      <span>Magical.Mente · Roberta</span>
+    </div>
+
+    <div class="hero-title">
+      <span class="line-1">Black Moon</span>
+      <span class="line-2">Lab</span>
+    </div>
+
+    <p class="hero-tagline">
+      La casa de la mujer indomable. Una comunidad viva donde el autoconocimiento se convierte en estructura, y la estructura en un negocio que elige.
+    </p>
+
+    <div class="hero-footer">
+      <span>Documento de marca</span>
+      <span>Versión del sistema visual para landing y comunicación</span>
+    </div>
+  </section>
+
+  <!-- ===== INDEX ===== -->
+  <section>
+    <div class="section-label">Índice</div>
+    <h2>Lo que vas a encontrar aquí</h2>
+    <div class="index-grid">
+      <a href="#sobre" class="index-item">
+        <span class="index-num">01</span>
+        <span class="index-label">Sobre Lab</span>
+      </a>
+      <a href="#logo" class="index-item">
+        <span class="index-num">02</span>
+        <span class="index-label">Logo</span>
+      </a>
+      <a href="#color" class="index-item">
+        <span class="index-num">03</span>
+        <span class="index-label">Color</span>
+      </a>
+      <a href="#tipografia" class="index-item">
+        <span class="index-num">04</span>
+        <span class="index-label">Tipografía</span>
+      </a>
+      <a href="#graficos" class="index-item">
+        <span class="index-num">05</span>
+        <span class="index-label">Elementos gráficos</span>
+      </a>
+      <a href="#voz" class="index-item">
+        <span class="index-num">06</span>
+        <span class="index-label">Voz y tono</span>
+      </a>
+      <a href="#componentes" class="index-item">
+        <span class="index-num">07</span>
+        <span class="index-label">Componentes</span>
+      </a>
+      <a href="#patrones" class="index-item">
+        <span class="index-num">08</span>
+        <span class="index-label">Patrones landing</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section id="sobre">
+    <div class="section-label">01 · Sobre Lab</div>
+    <div class="two-col">
+      <div>
+        <h2>La casa continua</h2>
+      </div>
+      <div>
+        <p class="lead">
+          Black Moon Lab es la membresía y comunidad de Roberta. La evolución natural del universo Black Moon, diseñada para mujeres que ya saben quiénes son y ahora necesitan un espacio vivo donde crear, publicar y hacer crecer su negocio con estructura y energía propia.
+        </p>
+        <br>
+        <p class="serif-quote">
+          "Donde Strategy es el proceso profundo de 12 semanas, Lab es la casa donde esas mujeres se quedan a vivir."
+        </p>
+        <br>
+        <p>
+          Dentro del Lab, cada miembro recibe frameworks de contenido que funcionan, coaching de negocio aplicado, estructura clara para empezar a publicar sin improvisar, y una lectura energética y astrológica de su marca para crear desde su esencia y no desde la copia.
+        </p>
+
+        <div class="relation-box">
+          <div class="relation-col">
+            <h5>El universo</h5>
+            <div class="name">Black Moon Strategy</div>
+            <p>Mentoría 1:1 de 12 semanas. Proceso profundo de identidad, estructura y lanzamiento.</p>
+          </div>
+          <div class="relation-divider"></div>
+          <div class="relation-col">
+            <h5>La casa continua</h5>
+            <div class="name pink">Black Moon Lab</div>
+            <p>Membresía y comunidad. Frameworks, coaching y marketing energético de forma constante.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOGO ===== -->
+  <section id="logo">
+    <div class="section-label">02 · Logo</div>
+    <h2>La firma visible</h2>
+    <p class="lead">El logo de Lab hereda la construcción del universo Black Moon. "Black Moon" en Fontuna para la estructura y autoridad, y "Lab" en Signature para la energía viva, indomable y fiel al arquetipo de la luna negra.</p>
+
+    <div class="logo-showcase" style="margin-top: 48px;">
+      <span class="sparkle tl"><svg><use href="#sparkle"/></svg></span>
+      <span class="sparkle br"><svg><use href="#sparkle"/></svg></span>
+      <div class="logo-mark">
+        <span class="lm-1">Black Moon</span>
+        <span class="lm-2">Lab</span>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 80px;">Versiones sobre fondo</h4>
+    <div class="logo-variants">
+      <div class="logo-variant dark">
+        <span class="logo-variant-label">Principal · fondo negro</span>
+        <div class="logo-mark">
+          <span class="lm-1">Black Moon</span>
+          <span class="lm-2">Lab</span>
+        </div>
+      </div>
+      <div class="logo-variant cream">
+        <span class="logo-variant-label">Alt · fondo claro</span>
+        <div class="logo-mark">
+          <span class="lm-1">Black Moon</span>
+          <span class="lm-2">Lab</span>
+        </div>
+      </div>
+      <div class="logo-variant pink">
+        <span class="logo-variant-label">Accent · fondo rosa</span>
+        <div class="logo-mark">
+          <span class="lm-1">Black Moon</span>
+          <span class="lm-2">Lab</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule-col do">
+        <h5>Sí hacer</h5>
+        <ul>
+          <li>Respetar el contraste de pesos entre Fontuna (display rotundo) y Signature (manuscrita fluida)</li>
+          <li>Dejar espacio en blanco generoso alrededor del logo, mínimo la altura de la "M"</li>
+          <li>Usar "Lab" siempre en rosa Black Moon Pink cuando el fondo lo permita</li>
+          <li>Inclinar ligeramente "Lab" hacia la izquierda, siguiendo el trazo natural de Signature</li>
+          <li>Mantener "Lab" superpuesto parcialmente con la línea base de "Black Moon"</li>
+        </ul>
+      </div>
+      <div class="rule-col dont">
+        <h5>No hacer</h5>
+        <ul>
+          <li>No sustituir Fontuna o Signature por otras fuentes</li>
+          <li>No rellenar el logo con gradientes ni efectos</li>
+          <li>No poner "Lab" en el mismo color que "Black Moon"</li>
+          <li>No enderezar "Lab" ni colocarlo en línea recta alineada</li>
+          <li>No reducir el logo a menos de 120px de ancho en digital</li>
+          <li>No usar "Lab" en fuentes alternativas tipo script genérico</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COLOR ===== -->
+  <section id="color">
+    <div class="section-label">03 · Sistema de color</div>
+    <h2>Negro profundo, rosa indomable</h2>
+    <p class="lead">La paleta de Lab respira en negro y rosa magenta. El negro sostiene el arquetipo de la luna negra, y el rosa marca la diferencia con Strategy: más movimiento, más energía, más comunidad viva.</p>
+
+    <h4 style="margin-top: 64px;">Paleta primaria</h4>
+    <div class="palette-grid">
+      <div class="swatch bg">
+        <div>
+          <div class="swatch-name">Lab Black</div>
+          <div class="swatch-hex">#0A0A0A</div>
+        </div>
+        <div class="swatch-role">Fondo principal. El silencio antes de la voz.</div>
+      </div>
+      <div class="swatch pink">
+        <div>
+          <div class="swatch-name" style="color: var(--cream);">BM Pink</div>
+          <div class="swatch-hex" style="color: rgba(255,255,255,0.8);">#EC1F80</div>
+        </div>
+        <div class="swatch-role" style="color: var(--cream);">Acento vivo. La firma de Lab.</div>
+      </div>
+      <div class="swatch pink-light">
+        <div>
+          <div class="swatch-name" style="color: var(--bg);">Pink Light</div>
+          <div class="swatch-hex" style="color: rgba(10,10,10,0.7);">#F56BAA</div>
+        </div>
+        <div class="swatch-role" style="color: var(--bg);">Estados hover, detalles suaves.</div>
+      </div>
+      <div class="swatch pink-dark">
+        <div>
+          <div class="swatch-name" style="color: var(--cream);">Pink Dark</div>
+          <div class="swatch-hex" style="color: rgba(255,255,255,0.8);">#B81464</div>
+        </div>
+        <div class="swatch-role" style="color: var(--cream);">Estados pressed, profundidad.</div>
+      </div>
+      <div class="swatch cream">
+        <div>
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#F5F3EF</div>
+        </div>
+        <div class="swatch-role">Tinta cálida. Texto sobre negro.</div>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 48px;">Paleta secundaria</h4>
+    <div class="sub-palette" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="swatch bg-card">
+        <div>
+          <div class="swatch-name">Card</div>
+          <div class="swatch-hex">#1A1A1A</div>
+        </div>
+        <div class="swatch-role">Superficies elevadas.</div>
+      </div>
+      <div class="swatch ink-muted">
+        <div>
+          <div class="swatch-name" style="color: var(--bg);">Muted Ink</div>
+          <div class="swatch-hex" style="color: rgba(10,10,10,0.7);">#A8A5A0</div>
+        </div>
+        <div class="swatch-role" style="color: var(--bg);">Texto de apoyo, metadatos.</div>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 64px;">Proporción sugerida</h4>
+    <p style="font-size: 13px; color: var(--ink-subtle); margin-bottom: 16px;">El rosa es acento, no protagonista del fondo. Se usa con intención y nunca se diluye.</p>
+    <div class="proportion-bar">
+      <div class="pb-segment bg">68% Negro</div>
+      <div class="pb-segment cream">22% Cream</div>
+      <div class="pb-segment pink">10% Rosa</div>
+    </div>
+  </section>
+
+  <!-- ===== TIPOGRAFÍA ===== -->
+  <section id="tipografia">
+    <div class="section-label">04 · Tipografía</div>
+    <h2>Un sistema de cuatro voces</h2>
+    <p class="lead">Fontuna sostiene la autoridad, Signature firma con energía, Cormorant Garamond aporta el matiz editorial, y DM Sans resuelve toda la comunicación funcional. El mono (DM Mono) se reserva para etiquetas y metadatos.</p>
+
+    <div style="margin-top: 64px;">
+
+      <div class="typo-row">
+        <div class="typo-meta">
+          <h5>Display · H1/H2</h5>
+          <div class="font-name">Fontuna</div>
+          <div class="font-use">Titulares principales, logo, hitos. Siempre en mayúsculas, tracking ligeramente abierto.</div>
+        </div>
+        <div class="typo-sample">
+          <div class="sample-display">Identidad indomable</div>
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-meta">
+          <h5>Script · Acentos</h5>
+          <div class="font-name">Signature</div>
+          <div class="font-use">Palabras firma, "Lab", remates manuscritos. Siempre en rosa. Una o dos palabras máximo.</div>
+        </div>
+        <div class="typo-sample">
+          <div class="sample-script">La casa continua</div>
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-meta">
+          <h5>Editorial · Quotes</h5>
+          <div class="font-name" style="font-family: var(--serif); font-style: italic; text-transform: none; font-size: 28px;">Cormorant</div>
+          <div class="font-use">Pull quotes, subheads editoriales, frases que piden respiración. En itálica. Color cream.</div>
+        </div>
+        <div class="typo-sample">
+          <div class="sample-serif">"Una marca no se inventa. Se reconoce, se ordena y se hace visible."</div>
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-meta">
+          <h5>Body · Lectura</h5>
+          <div class="font-name" style="font-family: var(--body); text-transform: none; font-size: 22px; font-weight: 400;">DM Sans</div>
+          <div class="font-use">Párrafos, listas, microcopia, UI. Peso 300 para cuerpo, 500 para énfasis. Tamaño base 17px.</div>
+        </div>
+        <div class="typo-sample">
+          <div class="sample-body">
+            Lab nace para acompañar a mujeres que ya han hecho el trabajo interno y ahora necesitan estructura. Aquí no se improvisa contenido, no se copian fórmulas prestadas, no se persigue algoritmos. Aquí se construye desde lo propio.
+          </div>
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-meta">
+          <h5>Mono · Metadatos</h5>
+          <div class="font-name" style="font-family: var(--mono); text-transform: none; font-size: 18px;">DM Mono</div>
+          <div class="font-use">Etiquetas de sección, números, navegación, créditos. Siempre en uppercase con tracking amplio.</div>
+        </div>
+        <div class="typo-sample">
+          <div class="sample-mono">01 · Membresía · Cupos limitados</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ELEMENTOS GRÁFICOS ===== -->
+  <section id="graficos">
+    <div class="section-label">05 · Elementos gráficos</div>
+    <h2>El alfabeto de la luna</h2>
+    <p class="lead">Tres elementos sostienen toda la identidad visual de Lab. Estrella de cuatro puntas, líneas finas y crescente como firma. Se usan con moderación, siempre como remate, nunca como decoración gratuita.</p>
+
+    <div class="graphics-grid">
+
+      <div class="graphic-card">
+        <div class="graphic-preview">
+          <svg width="28" height="28" viewBox="0 0 24 24"><use href="#sparkle"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" style="opacity: 0.6;"><use href="#sparkle"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" style="opacity: 0.4;"><use href="#sparkle"/></svg>
+        </div>
+        <div class="graphic-info">
+          <h5>Estrella 4 puntas</h5>
+          <p>Icono firma del universo Black Moon. Se coloca en esquinas de secciones hero, en remates de CTAs y como separador visual. En cream, o en rosa para acentos clave.</p>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview" style="width: 100%; flex-direction: column;">
+          <div class="divider-demo">
+            <div class="sparkle-accent"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: var(--pink);"><use href="#sparkle"/></svg></div>
+          </div>
+        </div>
+        <div class="graphic-info">
+          <h5>Línea cálida</h5>
+          <p>Heredada del universo BMS. Línea fina en Cream (#F5F3EF) con estrella centrada en rosa. Se usa como divisor entre secciones editoriales clave.</p>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview">
+          <svg width="56" height="56" viewBox="0 0 24 24">
+            <path d="M12 2 C6.48 2 2 6.48 2 12 s4.48 10 10 10 c1.72 0 3.34-0.43 4.75-1.19 C11.63 18.93 7.94 14.95 7.94 10.5 S11.63 2.07 16.75 1.19 C15.34 2.43 13.72 2 12 2z" fill="var(--pink)"/>
+          </svg>
+        </div>
+        <div class="graphic-info">
+          <h5>Luna creciente</h5>
+          <p>Símbolo del arquetipo Lilith. Se usa en listas destacadas, como viñeta premium antes de beneficios o promesas. Solo en rosa Black Moon Pink.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== VOZ Y TONO ===== -->
+  <section id="voz">
+    <div class="section-label">06 · Voz y tono</div>
+    <h2>Cómo habla Lab</h2>
+    <p class="lead">La voz de Lab es directa, cercana y con autoridad. Habla de mujer a mujer, sin marketing masculino, sin promesas inflables, sin jerga vacía. Llama a las cosas por su nombre y siempre conecta identidad con estructura.</p>
+
+    <div class="voice-principles">
+
+      <div class="principle">
+        <span class="principle-num">01</span>
+        <div>
+          <h5>Clara, nunca hueca</h5>
+          <p>Cada frase dice algo. Si una palabra se puede quitar sin perder sentido, se quita. Nada de relleno motivacional.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">02</span>
+        <div>
+          <h5>Cercana con autoridad</h5>
+          <p>Tutea, pero no se apoya en confianza para compensar falta de criterio. Sabe lo que dice y por qué lo dice.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">03</span>
+        <div>
+          <h5>Femenina sin cursilería</h5>
+          <p>Habla de energía, arquetipos y astrología sin caer en tono místico vacío. Todo se aterriza en estructura y decisión.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">04</span>
+        <div>
+          <h5>Anti marketing masculino</h5>
+          <p>Nada de "hustle", "cerrar ventas", "dominar el mercado". Lab habla de atraer, elegir, sostener, construir.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">05</span>
+        <div>
+          <h5>Siempre con estructura detrás</h5>
+          <p>Aunque el lenguaje sea emocional, debajo siempre hay un sistema. Lab no vende inspiración, vende claridad aplicada.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">06</span>
+        <div>
+          <h5>Escritura sin rayas largas</h5>
+          <p>No se usan em dashes. Punto, coma, punto y coma, dos puntos. Frases cortas que respiran. El ritmo es parte del mensaje.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h4 style="margin-top: 64px;">Ejemplos de tono</h4>
+    <div class="voice-examples">
+      <div class="voice-example good">
+        <div class="voice-example-label">Así sí</div>
+        <p>"Lab es el espacio donde dejas de improvisar contenido y empiezas a publicar con sistema."</p>
+      </div>
+      <div class="voice-example bad">
+        <div class="voice-example-label">Así no</div>
+        <p>"Únete a Lab y descubre el secreto para romperla en redes sociales y facturar 6 cifras."</p>
+      </div>
+      <div class="voice-example good">
+        <div class="voice-example-label">Así sí</div>
+        <p>"Tu marca ya existe. Solo hace falta ordenarla, nombrarla y hacerla visible."</p>
+      </div>
+      <div class="voice-example bad">
+        <div class="voice-example-label">Así no</div>
+        <p>"Transforma tu vida, manifiesta tu mejor versión y atrae la abundancia que mereces."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPONENTES ===== -->
+  <section id="componentes">
+    <div class="section-label">07 · Componentes</div>
+    <h2>Piezas para construir</h2>
+    <p class="lead">El kit mínimo para la landing page. Botones, tarjetas, inputs y etiquetas, todos coherentes con el sistema.</p>
+
+    <div style="margin-top: 64px;">
+
+      <div class="component-row">
+        <div class="component-meta">
+          <h5>Botón primario</h5>
+          <p>CTA principal. Fondo rosa, texto cream, tipografía mono. Hover oscurece y eleva 1px.</p>
+        </div>
+        <div class="component-demo">
+          <a href="#" class="btn btn-primary">Entrar al Lab <span class="arrow">→</span></a>
+          <a href="#" class="btn btn-secondary">Reservar plaza</a>
+          <a href="#" class="btn btn-ghost">Saber más</a>
+          <a href="#" class="btn btn-link">Leer el manifiesto</a>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <div class="component-meta">
+          <h5>Tarjeta</h5>
+          <p>Superficie elevada para beneficios o módulos de la membresía. Acento rosa superior izquierdo.</p>
+        </div>
+        <div class="component-demo">
+          <div class="card">
+            <div class="card-eyebrow">Módulo 01</div>
+            <h3>Frameworks</h3>
+            <p>Plantillas y sistemas listos para tu contenido. Cada mes, un framework nuevo aplicado a tu nicho.</p>
+            <a href="#" class="btn btn-link">Ver qué incluye</a>
+          </div>
+          <div class="card">
+            <div class="card-eyebrow">Módulo 02</div>
+            <h3>Astro Branding</h3>
+            <p>Lectura energética aplicada a tu marca. Cómo comunicar desde tu carta, no desde la copia.</p>
+            <a href="#" class="btn btn-link">Ver qué incluye</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <div class="component-meta">
+          <h5>Formulario</h5>
+          <p>Inputs minimalistas con línea inferior. Sin bordes completos. Línea rosa en focus.</p>
+        </div>
+        <div class="component-demo">
+          <form class="form-demo" onsubmit="event.preventDefault()">
+            <div class="form-group">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-input" placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="tunombre@email.com">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 24px;">Apuntarme a la lista <span class="arrow">→</span></button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PATRONES LANDING ===== -->
+  <section id="patrones">
+    <div class="section-label">08 · Patrones landing</div>
+    <h2>Secciones tipo</h2>
+    <p class="lead">Bloques de referencia para la landing page. Combinan todos los elementos del sistema en su proporción correcta.</p>
+
+    <!-- Hero pattern -->
+    <div class="pattern-preview" style="margin-top: 64px;">
+      <div class="pattern-label">Patrón · Hero</div>
+      <div class="pattern-body">
+        <span class="sparkle" style="top: 20px; left: 20px;"><svg><use href="#sparkle"/></svg></span>
+        <span class="sparkle" style="top: 20px; right: 20px;"><svg><use href="#sparkle"/></svg></span>
+        <div class="mini-hero">
+          <div class="mini-eyebrow">Membresía · Cupos limitados</div>
+          <h1 class="mini-h1">La casa<br>de la mujer <span class="script">indomable</span></h1>
+          <p class="mini-lead">Frameworks, coaching y marketing energético en un mismo espacio. Para quienes ya saben quiénes son y ahora necesitan estructura para elegir y ser elegidas.</p>
+          <a href="#" class="btn btn-primary">Entrar al Lab <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section block pattern -->
+    <div class="pattern-preview">
+      <div class="pattern-label">Patrón · Sección de valor</div>
+      <div class="pattern-body">
+        <div class="mini-section">
+          <div class="mini-section-num">01</div>
+          <div>
+            <div class="mini-eyebrow">Dentro de Lab</div>
+            <h3>Frameworks que no se improvisan</h3>
+            <p>Cada mes recibes un sistema aplicable de inmediato. Contenido que no depende de tu inspiración, sino de una estructura que funciona. Sin copiar a nadie. Desde quien tú eres.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA pattern -->
+    <div class="pattern-preview">
+      <div class="pattern-label">Patrón · CTA de cierre</div>
+      <div class="pattern-body">
+        <div class="mini-cta">
+          <span class="sparkle tl"><svg><use href="#sparkle"/></svg></span>
+          <span class="sparkle tr"><svg><use href="#sparkle"/></svg></span>
+          <span class="sparkle bl"><svg><use href="#sparkle"/></svg></span>
+          <span class="sparkle br"><svg><use href="#sparkle"/></svg></span>
+          <h3>Tu sitio en el <span class="script">Lab</span></h3>
+          <p>Cupos limitados cada trimestre. Si sientes que es tu momento, lo es.</p>
+          <a href="#" class="btn btn-primary">Quiero mi plaza <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-logo">Black Moon</div>
+    <div class="footer-script">Lab</div>
+    <div class="footer-meta">Brand Guidelines · Magical.Mente · Roberta · V1.0</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

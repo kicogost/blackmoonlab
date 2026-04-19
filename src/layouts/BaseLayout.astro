@@ -14,10 +14,8 @@
  */
 import { CLIENT } from '../config/client.js'
 import '../styles/globals.css'
-import Navbar from '../components/Navbar.jsx'
-import Footer from '../components/Footer.jsx'
 import WhatsAppButton from '../components/WhatsAppButton.jsx'
-import CookieBanner from '../components/CookieBanner.jsx'
+import CustomCursor from '../components/CustomCursor.jsx'
 
 const { title, description, canonical, schema: pageSchema, robots } = Astro.props
 const pathname = Astro.url.pathname
@@ -70,7 +68,7 @@ const localBusinessJson = JSON.stringify(localBusinessSchema)
   <!-- Fonts — CLAUDE: update href when changing ZONE 2 fonts in globals.css -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Allura&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Mobile browser chrome color -->
   <meta name="theme-color" content={CLIENT.brand?.primaryColor ?? '#000000'} />
@@ -145,12 +143,10 @@ const localBusinessJson = JSON.stringify(localBusinessSchema)
   )}
 </head>
 <body>
-  <Navbar pathname={pathname} client:load />
   <main>
     <slot />
   </main>
-  <Footer client:load />
   <WhatsAppButton client:load />
-  <CookieBanner client:load />
+  <CustomCursor client:load />
 </body>
 </html>

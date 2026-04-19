@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import DeclaracionAccesibilidad from './legal/DeclaracionAccesibilidad.jsx'
+import { CLIENT } from '../config/client.js'
+---
+<BaseLayout
+  title={`Declaración de Accesibilidad | ${CLIENT.name}`}
+  description={`Declaración de accesibilidad de ${CLIENT.name}, conforme a las Pautas WCAG 2.1 nivel AA.`}
+  canonical={`https://${CLIENT.domain}/declaracion-accesibilidad`}
+  robots="noindex, follow"
+>
+  <DeclaracionAccesibilidad client:load />
+</BaseLayout>

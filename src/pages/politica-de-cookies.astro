@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PoliticaCookies from './legal/PoliticaCookies.jsx'
+import { CLIENT } from '../config/client.js'
+---
+<BaseLayout
+  title={`Política de Cookies | ${CLIENT.name}`}
+  description={`Política de cookies de ${CLIENT.name}. Qué cookies usamos y cómo gestionar tu consentimiento.`}
+  canonical={`https://${CLIENT.domain}/politica-de-cookies`}
+  robots="noindex, follow"
+>
+  <PoliticaCookies client:load />
+</BaseLayout>

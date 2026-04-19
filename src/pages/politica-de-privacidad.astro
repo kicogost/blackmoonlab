@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PoliticaPrivacidad from './legal/PoliticaPrivacidad.jsx'
+import { CLIENT } from '../config/client.js'
+---
+<BaseLayout
+  title={`Política de Privacidad | ${CLIENT.name}`}
+  description={`Política de privacidad de ${CLIENT.name}. Cómo tratamos tus datos personales conforme al RGPD.`}
+  canonical={`https://${CLIENT.domain}/politica-de-privacidad`}
+  robots="noindex, follow"
+>
+  <PoliticaPrivacidad client:load />
+</BaseLayout>

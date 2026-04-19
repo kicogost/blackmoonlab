@@ -2,11 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Home from './Home.jsx'
 import { CLIENT } from '../config/client.js'
+
+const faqItems = [
+  { q: '¿Qué es exactamente Black Moon Lab?', a: 'Una membresía mensual donde cada semana recibes estrategia de contenido aplicable, ideas listas para ejecutar, feedback personal de Roberta en la comunidad y una clase en directo cada mes.' },
+  { q: '¿Para quién es este laboratorio?', a: 'Para emprendedoras de servicios: coaches, terapeutas, consultoras y marcas personales que ya están creando pero publican sin estrategia y no consiguen clientes de forma consistente.' },
+  { q: '¿Cuánto tiempo necesito dedicar a la semana?', a: 'Con el plan semanal y el Content Journal, la mayoría gestiona toda su semana de contenido en 2-3 horas bien enfocadas.' },
+  { q: '¿Qué incluye la membresía?', a: 'Plan estratégico semanal (4 piezas de feed + stories), metodología del Content Journal, comunidad privada con feedback personal y clase mensual en directo con auditorías reales. €49/mes.' },
+  { q: '¿Qué es el Content Journal?', a: 'La pieza central del laboratorio: anotas lo que vives cada semana y ese material real se transforma en contenido estratégico que no se siente forzado.' },
+  { q: '¿Hay permanencia?', a: 'No. Cancelas cuando quieras.' },
+  { q: '¿Cómo recibo el contenido cada semana?', a: 'Directamente en la plataforma del lab: estructura de feed, guion de stories y dirección estratégica, listos para ejecutar.' },
+  { q: '¿Qué pasa si no tengo muchos seguidores todavía?', a: 'El laboratorio funciona igual para crecer desde 200 seguidores que para afinar una cuenta con más recorrido.' },
+]
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqItems.map(i => ({
+    '@type': 'Question',
+    'name': i.q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': i.a },
+  })),
+})
 ---
 <BaseLayout
   title={`${CLIENT.name} — ${CLIENT.tagline}`}
   description={CLIENT.description}
   canonical={`https://${CLIENT.domain}/`}
+  schema={faqSchema}
 >
   <Home client:load />
 </BaseLayout>

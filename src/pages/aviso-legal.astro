@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import AvisoLegal from './legal/AvisoLegal.jsx'
+import { CLIENT } from '../config/client.js'
+---
+<BaseLayout
+  title={`Aviso Legal | ${CLIENT.name}`}
+  description={`Aviso legal de ${CLIENT.name}. Información sobre el titular del sitio web, condiciones de uso y propiedad intelectual.`}
+  canonical={`https://${CLIENT.domain}/aviso-legal`}
+  robots="noindex, follow"
+>
+  <AvisoLegal client:load />
+</BaseLayout>
